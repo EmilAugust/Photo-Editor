@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Photo Editor</title>
+    <link rel="stylesheet" href="editor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="overlay" id="overlay">
+      <div class="selectMenu" id="selectMenu">
+        <div class="h2Wrapper">
+          <h2>Create Canvas</h2>
+          <button type="button" name="button" class="closeMenu fas fa-times" id="closeMenu"></button>
+        </div>
+        <div class="buttonWrapper">
+          <button type="button" name="button" class="uploadImage" id="uploadImage">Upload Image</button>
+          <label class="or">OR</label>
+          <button type="button" name="button" class="createBlank" id="createBlank">Create Blank</button>
+        </div>
+      </div>
+      <div class="selectMenu2" id="selectMenu2">
+        <div class="h2Wrapper">
+          <h2>Upload Image</h2>
+          <button type="button" name="button" class="closeMenu fas fa-times" id="closeMenu"></button>
+        </div>
+        <div class="buttonWrapper">
+          <input type="file" id="imageLoader" style="display: none;" />
+          <button class="imageUploader" onclick="document.getElementById('imageLoader').click();">Upload Image</button>
+          <label class="or">OR</label>
+          <div class="loadURLContainer">
+            <input type="url" name="url" id="url" class="urlLoader" id="urlLoader" placeholder="https://example.com/this-image.jpg" required>
+            <button type="button" name="button" class="loadURL">Load URL</button>
+          </div>
+        </div>
+      </div>
+      <div class="selectMenu3" id="selectMenu3">
+        <div class="h2Wrapper">
+          <h2>Create Blank</h2>
+          <button type="button" name="button" class="closeMenu fas fa-times" id="closeMenu"></button>
+        </div>
+        <div class="buttonWrapper">
+          <div class="sizeContainer">
+            <label>Width</label>
+            <input type="number" id="canvasWidth" name="" value="384" min="100" max="800">
+          </div>
+          <div class="sizeContainer">
+            <label>Height</label>
+            <input type="number" id="canvasHeight" name="" value="216" min="100" max="800">
+          </div>
+          <button type="button" name="button" class="createBlank" id="loadBlank">Create Blank</button>
+        </div>
+      </div>
+    </div>
+    <ul class="toolsList">
+      <li>
+        <button class="tool fas fa-file-upload" id="uploadTool"></button>
+      </li>
+      <li><button class="tool fas fa-download" id="download"></button></li>
+      <li><button class="tool fas fa-sliders-h" id="adjustments"></button></li>
+      <li><button class="tool fas fa-heading" id="text"></button></li>
+      <li><button class="tool fas fa-paint-brush" id="paint"></button></li>
+    </ul>
+    <div class="properties" id="prop1">
+      <div class="inner">
+        <h2>Adjustements</h2>
+        <label>Contrast</label>
+        <input class="slider" id="contrast" type="range" name="" value="1" min="1" max="2" step="0.01">
+        <label>Brightness</label>
+        <input class="slider" id="brightness" type="range" name="" value="1" min="1" max="2" step="0.01">
+        <label>Saturation</label>
+        <input class="slider" id="saturation" type="range" name="" value="1" min="1" max="2" step="0.01">
+        <label>Hue</label>
+        <input class="slider" id="hue" type="range" name="" value="0" min="0" max="360">
+        <label>Grayscale</label>
+        <input class="slider" id="grayscale" type="range" name="" value="0" min="0" max="1" step="0.01">
+        <label>Sepia</label>
+        <input class="slider" id="sepia" type="range" name="" value="0" min="0" max="1" step="0.01">
+      </div>
+    </div>
+    <div class="properties" id="prop2">
+      <div class="inner">
+        <h2>Text</h2>
+        <label>Displayed Text</label>
+        <input type="text" class="textInput" id="textInput" placeholder="Apply text here">
+        <label>Color</label>
+        <input type="color" class="colorInput" id="colorInput">
+        <label>Size</label>
+        <input type="number" class="numberInput" id="fontSizeInput" value="32">
+        <label>Font</label>
+        <select class="fontInput" id="fontInput">
+          <option value="Arial">Arial</option>
+          <option value="Arial Black">Arial Black</option>
+          <option value="Verdana">Verdana</option>
+          <option value="Tahoma">Tahoma</option>
+          <option value="Trebuchet MS">Trebuchet MS</option>
+          <option value="Impact">Impact</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Didot">Didot</option>
+          <option value="Georgia">Georgia</option>
+          <option value="American Typewriter">American Typewriter</option>
+          <option value="Andalé Mono">Andalé Mono</option>
+          <option value="Courier">Courier</option>
+          <option value="Lucida Console">Lucida Console</option>
+          <option value="Monaco">Monaco</option>
+          <option value="Bradley Hand">Bradley Hand</option>
+          <option value="Brush Script MT">Brush Script MT</option>
+          <option value="Luminari">Luminari</option>
+          <option value="Comic Sans MS">Comic Sans MS</option>
+        </select>
+      </div>
+    </div>
+    <div class="properties" id="prop3">
+      <div class="inner">
+        <h2>Draw</h2>
+        <label>Color</label>
+        <input type="color" class="colorInput" id="lineColorInput">
+        <label>Size</label>
+        <input type="number" class="numberInput" id="lineSizeInput" value="10">
+      </div>
+    </div>
+    <div class="container" id="container">
+      <canvas id="imageCanvas"></canvas>
+    </div>
+    <script src="editor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/context-filter-polyfill@0.2.4/dist/index.min.js"></script>
+  </body>
+</html>
